@@ -2,8 +2,6 @@ import { FETCH_COMICS_FAILURE, FETCH_COMICS_SUCCESS, FETCH_COMICS_REQUEST } from
 
 const comics = (state = { fetching: true }, action) => {
   switch(action.type) {
-    case FETCH_COMICS_REQUEST:
-      return state;
     case FETCH_COMICS_FAILURE:
       return { ...state, error: action.error, fetching: false }
     case FETCH_COMICS_SUCCESS:
@@ -12,5 +10,7 @@ const comics = (state = { fetching: true }, action) => {
       return state;
   }
 };
+
+
 
 export default comics;
