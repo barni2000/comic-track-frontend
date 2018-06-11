@@ -1,4 +1,4 @@
-import { FETCH_COMICS_FAILURE, FETCH_COMICS_SUCCESS, FETCH_COMICS_REQUEST } from '../actions/types';
+import { FETCH_COMICS_FAILURE, FETCH_COMICS_SUCCESS } from '../actions/types';
 
 const comics = (state = { fetching: true }, action) => {
   switch(action.type) {

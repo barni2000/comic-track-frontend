@@ -1,7 +1,6 @@
 import {
   FETCH_PUBLISHERS_FAILURE,
   FETCH_PUBLISHERS_SUCCESS,
-  FETCH_PUBLISHERS_REQUEST,
 } from '../actions/types';
 
 const publishers = (state = { fetching: true }, action) => {

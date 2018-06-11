@@ -10,13 +10,13 @@ const AppFooter = () => (
   <Footer justify='between'>
     <Title>
     <s />
-     Title
+     Comic Track
     </Title>
     <Box direction='row'
       align='center'
       pad={{"between": "medium"}}>
       <Paragraph margin='none'>
-        Copyright
+        Copyright <a href="https://github.com/barni2000">barni2000</a>
       </Paragraph>
       <Menu direction='row'
         size='small'

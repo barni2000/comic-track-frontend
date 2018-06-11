@@ -14,6 +14,10 @@ import {
   ADD_WISH_SUCCESS,
   REMOVE_WISH_FAILURE,
   REMOVE_WISH_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGOUT_FAILURE,
+  LOGOUT_SUCCESS,
 } from './types';
 
 
@@ -45,6 +49,19 @@ const makeUpdateActionCreator = (typeSuccess, typeFailure) => (url, data) => (di
      }))
 }
 
+export const login = (username, password) => (dispatch) => {
+  return session.post('/api/v1/login/', { username, password })
+    .then(response => dispatch({
+      type: 'LOGIN_SUCCESS',
+      data: response.data,
+    })).catch(error => dispatch({
+      type: 'LOGIN_FAILURE',
+      error: error,
+    }))
+}
+
+
+export const logout = makeFetchActionCreator(LOGOUT_SUCCESS, LOGOUT_FAILURE, '/api/v1/logout/')
 export const fetchComics = makeFetchActionCreator(FETCH_COMICS_SUCCESS, FETCH_COMICS_FAILURE, '/api/v1/comics/')
 export const fetchPublishers = makeFetchActionCreator(FETCH_PUBLISHERS_SUCCESS, FETCH_PUBLISHERS_FAILURE, '/api/v1/publishers/')
 export const fetchProfile = makeFetchActionCreator(FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAILURE, '/api/v1/profiles/me/')

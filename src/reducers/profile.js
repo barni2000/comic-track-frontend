@@ -9,6 +9,9 @@ import {
   REMOVE_READ_SUCCESS,
   REMOVE_WISH_FAILURE,
   REMOVE_WISH_SUCCESS,
+  LOGIN_FAILURE,
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
 } from '../actions/types';
 
 const profile = (state = { fetching: true, is_authenticated: false }, action) => {
@@ -18,6 +21,7 @@ const profile = (state = { fetching: true, is_authenticated: false }, action) =>
     case ADD_WISH_FAILURE:
     case REMOVE_WISH_FAILURE:
       return { ...state, error: action.error, fetching: false}
+    case LOGIN_FAILURE:
     case FETCH_PROFILE_FAILURE:
       return { ...state, error: action.error, fetching: false, is_authenticated: false }
     case ADD_READ_SUCCESS:
@@ -26,6 +30,10 @@ const profile = (state = { fetching: true, is_authenticated: false }, action) =>
     case REMOVE_WISH_SUCCESS:
     case FETCH_PROFILE_SUCCESS:
       return { ...state, data: action.data, fetching: false, is_authenticated: true }
+    case LOGIN_SUCCESS:
+      return { ...state, is_authenticated: true, fetching: true }
+    case LOGOUT_SUCCESS:
+      return { is_authenticated: false }
     default:
       return state;
   }

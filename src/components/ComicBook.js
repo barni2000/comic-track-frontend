@@ -16,12 +16,10 @@ const ComicBook = ({ data, addRead, removeRead, addWish, removeWish }) => (
         <IssueControl
           read={_.contains(data.profile.read, data.url)}
           wished={_.contains(data.profile.wishlist, data.url)}
-          // TODO: Move this logic away
-          onAddReadClick={() => addRead(data.profile.url, {read: [...data.profile.read,  data.url]})}
-          onRemoveReadClick={() => removeRead(data.profile.url, {read: _.without(data.profile.read,  data.url)})}
-          onAddWishClick={() => addWish(data.profile.url, {wishlist: [...data.profile.wishlist,  data.url]})}
-          onRemoveWishClick={() => removeWish(data.profile.url, {wishlist: _.without(data.profile.read,  data.url)})}
-
+          onAddReadClick={() => addRead(data.profile, data.url)}
+          onRemoveReadClick={() => removeRead(data.profile, data.url)}
+          onAddWishClick={() => addWish(data.profile, data.url)}
+          onRemoveWishClick={() => removeWish(data.profile, data.url)}
         />
       </Box>
     }
