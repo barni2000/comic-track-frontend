@@ -1,34 +1,26 @@
-import React from 'react';
-import _ from 'underscore';
+import React from 'react'
 
-import Card from 'grommet/components/Card';
-import Box from 'grommet/components/Box';
-import Anchor from 'grommet/components/Anchor';
-import Image from 'grommet/components/Image';
+import Card from 'grommet/components/Card'
+import Box from 'grommet/components/Box'
+import Anchor from 'grommet/components/Anchor'
+import Image from 'grommet/components/Image'
 
-import IssueControl from './IssueControl';
+import IssueControlContainer from '../containers/IssueControlContainer'
 
-const ComicBook = ({ data, addRead, removeRead, addWish, removeWish }) => (
+const ComicBook = ({ id, data }) => (
   <Card
     thumbnail={
-      <Box colorIndex="neutral-4">
-        <Anchor path="/test2"><Image src={data.cover} /></Anchor>
-        <IssueControl
-          read={_.contains(data.profile.read, data.url)}
-          wished={_.contains(data.profile.wishlist, data.url)}
-          onAddReadClick={() => addRead(data.profile, data.url)}
-          onRemoveReadClick={() => removeRead(data.profile, data.url)}
-          onAddWishClick={() => addWish(data.profile, data.url)}
-          onRemoveWishClick={() => removeWish(data.profile, data.url)}
-        />
+      <Box colorIndex='neutral-4'>
+        <Anchor path={`/comics/${id}`}><Image src={data.cover} /></Anchor>
+        <IssueControlContainer issues={data.issues} />
       </Box>
     }
     label={data.publisher.name}
     heading={data.title}
     headingStrong={false}
-    link={<Anchor path='/test2' label='See More' />}
+    link={<Anchor path={`/comics/${id}`} label='See More' />}
     contentPad='small'
   />
-);
+)
 
-export default ComicBook;
+export default ComicBook

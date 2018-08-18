@@ -1,26 +1,27 @@
-import React from 'react';
-import { Route, withRouter } from 'react-router';
-import App from 'grommet/components/App';
-import Box from 'grommet/components/Box';
+import React from 'react'
+import { Route } from 'react-router'
+import App from 'grommet/components/App'
+import Box from 'grommet/components/Box'
 
-import AppHeader from './AppHeader';
-import AppFooter from './AppFooter';
-import ComicList from '../containers/ComicList';
-import Login from '../containers/Login';
+import AppHeaderContainer from '../containers/AppHeaderContainer'
+import ComicBookDetailContainer from '../containers/ComicBookDetailContainer'
+import AppFooter from './AppFooter'
+import ComicList from '../containers/ComicList'
+import Login from '../containers/Login'
 
-const Main = ({profile, logout}) => (
+const Main = ({ profile }) => (
   <App centered={false}>
-    <AppHeader profile={profile} onLogout={logout} />
+    <AppHeaderContainer />
     { profile.is_authenticated ?
-      <Box align="center">
-        <Route exact path="/" component={ComicList}/>
-        <Route path="/test2" render={() => <div>Hello2</div>}/>
+      <Box align='center'>
+        <Route exact path='/' component={ComicList} />
+        <Route path='/comics/:id' component={ComicBookDetailContainer} />
       </Box>
       :
-      <Box align="center"><Login /></Box>
+      <Box align='center'><Login /></Box>
     }
     <AppFooter />
   </App>
-);
+)
 
-export default withRouter(Main);
+export default Main

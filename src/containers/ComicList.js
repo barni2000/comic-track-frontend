@@ -1,66 +1,58 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import _ from 'underscore';
-import Tiles from 'grommet/components/Tiles';
-import Tile from 'grommet/components/Tile';
-import Spinning from 'grommet/components/icons/Spinning';
+import _ from 'underscore'
+import Tiles from 'grommet/components/Tiles'
+import Tile from 'grommet/components/Tile'
+import Spinning from 'grommet/components/icons/Spinning'
 
 import {
   fetchComics,
   fetchPublishers,
-  fetchProfile,
-} from '../actions';
+} from '../actions'
 
-import ComicBookContainer from './ComicBookContainer'
+import ComicBook from '../components/ComicBook'
 
 class ComicList extends Component {
   componentDidMount() {
-    this.props.fetchComics();
-    this.props.fetchPublishers();
-    this.props.fetchProfile();
+    this.props.fetchComics()
+    this.props.fetchPublishers()
   }
 
   renderTiles() {
     const {
       comics,
       publishers,
-      profile,
-    } = this.props;
-    return comics.data.map(item => {
-      const publisher = _.findWhere(publishers.data, {url: item.publisher});
+    } = this.props
+    return comics.data.map((item, id) => {
+      const publisher = _.findWhere(publishers.data, { url: item.publisher })
       return (
         <Tile key={Math.random()}>
-          <ComicBookContainer
-            data={{...item, publisher, profile: profile.data}}
-          />
+          <ComicBook id={id} data={{ ...item, publisher }} />
         </Tile>
-      );
-    });
+      )
+    })
   }
 
-  render () {
-    const { comics, publishers, profile } = this.props;
+  render() {
+    const { comics, publishers } = this.props
 
-    if(comics.fetching === false && publishers.fetching === false && profile.fetching === false) {
-      return <Tiles flush={false}>{this.renderTiles()}</Tiles>;
+    if (comics.fetching === false && publishers.fetching === false) {
+      return <Tiles flush={false}>{this.renderTiles()}</Tiles>
     }
 
-    return <Spinning size="huge" />;
+    return <Spinning size='huge' />
   }
-
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchComics: () => { dispatch(fetchComics()); },
-  fetchPublishers: () => { dispatch(fetchPublishers()); },
-  fetchProfile: () => { dispatch(fetchProfile()); },
-});
+  fetchComics: () => { dispatch(fetchComics()) },
+  fetchPublishers: () => { dispatch(fetchPublishers()) },
+})
 
 const mapStateToProps = state => ({
   comics: state.comics,
   publishers: state.publishers,
-  profile: state.profile,
-});
+})
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComicList));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComicList))

@@ -1,13 +1,15 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import comics from './comics';
-import publishers from './publishers';
-import profile from './profile';
+import comics from './comics'
+import issues from './issues'
+import publishers from './publishers'
+import profile from './profile'
 
 const rootReducer = combineReducers({
   comics,
+  issues,
   publishers,
-  profile
-});
+  profile,
+})
 
-export default rootReducer;
+export default rootReducer

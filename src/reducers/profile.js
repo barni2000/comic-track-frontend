@@ -12,31 +12,41 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
-} from '../actions/types';
+} from '../actions/types'
 
-const profile = (state = { fetching: true, is_authenticated: false }, action) => {
-  switch(action.type) {
+const INITIAL_STATE = {
+  fetching: true,
+  is_authenticated: false,
+  data: { read: [], wishlsit: [] },
+}
+
+const profile = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case ADD_READ_FAILURE:
     case REMOVE_READ_FAILURE:
     case ADD_WISH_FAILURE:
     case REMOVE_WISH_FAILURE:
-      return { ...state, error: action.error, fetching: false}
+      return { ...state, error: action.error, fetching: false }
     case LOGIN_FAILURE:
     case FETCH_PROFILE_FAILURE:
-      return { ...state, error: action.error, fetching: false, is_authenticated: false }
+      return {
+        ...state, error: action.error, fetching: false, is_authenticated: false,
+      }
     case ADD_READ_SUCCESS:
     case REMOVE_READ_SUCCESS:
     case ADD_WISH_SUCCESS:
     case REMOVE_WISH_SUCCESS:
     case FETCH_PROFILE_SUCCESS:
-      return { ...state, data: action.data, fetching: false, is_authenticated: true }
+      return {
+        ...state, data: action.data, fetching: false, is_authenticated: true,
+      }
     case LOGIN_SUCCESS:
       return { ...state, is_authenticated: true, fetching: true }
     case LOGOUT_SUCCESS:
       return { is_authenticated: false }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default profile;
+export default profile

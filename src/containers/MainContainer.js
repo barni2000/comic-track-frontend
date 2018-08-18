@@ -2,23 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { Main } from '../components'
-import { fetchProfile, logout } from '../actions'
+import { fetchProfile } from '../actions'
 
 class MainContainer extends Component {
-
   componentDidMount() {
-    this.props.fetchProfile();
+    this.props.fetchProfile()
   }
 
   render() {
-    return <Main {...this.props} />;
+    return <Main profile={this.props.profile} />
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   fetchProfile: () => dispatch(fetchProfile()),
-  // TODO: move somewhere else
-  logout: () => dispatch(logout()),
 })
 
 const mapStateToProps = state => ({
